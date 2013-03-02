@@ -19,17 +19,16 @@
   mygroup
   (group-spec
    "mygroup"
-   :phases {:bootstrap (phase-fn (automated-admin-user))
+   :phases {:bootstrap automated-admin-user
             :configure (phase-fn
                         (pa/package "curl")
                         (pa/package "wget")
-                        ;; (pa/package "git")
-                        ;; (pa/package "emacs24")
-                        )}
+                        (pa/package "git")
+                        (pa/package "emacs24"))}
    :node-spec (node-spec
                :image {:os-family :ubuntu
-                       ;; :os-version-matches "12.10"
-                       :image-id "ami-2861685c"}
+                       :os-version-matches "12.10"
+                       :image-id "eu-west-1/ami-2861685c"}
                :hardware {:min-cores 1 :min-ram 512})))
 
 (defn start-node
@@ -47,4 +46,11 @@
       (converge :compute (pc/compute-service :aws))))
 
 (comment
-  (start-node mygroup))
+  ;; personal function:
+  ;; - to start a node
+  (start-node mygroup)
+  ;; - to stop one
+  (stop-node mygroup)
+
+  ;; to list the nodes
+  (pallet.compute/nodes (pc/compute-service :aws)))
