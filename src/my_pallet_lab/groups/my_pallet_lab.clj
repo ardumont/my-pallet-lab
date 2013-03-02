@@ -29,7 +29,9 @@
                :image {:os-family :ubuntu
 ;;                       :os-version-matches "12.10"
                        :image-id "eu-west-1/ami-2861685c"}
-               :hardware {:hardware-id "m1.micro"})))
+               :hardware {:smallest true
+                          :min-cores 1
+                          :min-ram 512})))
 
 (defn start-node
   "Starting the group-spec with one node"
