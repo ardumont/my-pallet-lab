@@ -28,7 +28,8 @@
                :image {:os-family :ubuntu
 ;;                       :os-version-matches "12.10"
                        :image-id "eu-west-1/ami-2861685c"}
-               :hardware {:smallest true
+               :hardware {:hardware-id "m1.micro"
+                          :smallest true
                           :min-cores 1
                           :min-ram 512})))
 
