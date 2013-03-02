@@ -21,17 +21,15 @@
    :phases {:bootstrap (plan-fn (automated-admin-user))
             :configure (plan-fn
                         (package "curl")
-                        (package "wget")
-                        (package "git")
-                        (package "emacs24"))}
+                        ;; (package "wget")
+                        ;; (package "git")
+                        ;; (package "emacs24")
+                        )}
    :node-spec (node-spec
                :image {:os-family :ubuntu
 ;;                       :os-version-matches "12.10"
                        :image-id "eu-west-1/ami-2861685c"}
-               :hardware {:hardware-id "m1.micro"
-                          :smallest true
-                          :min-cores 1
-                          :min-ram 512})))
+               :hardware {:hardware-id "m1.micro"})))
 
 (defn start-node
   "Starting the group-spec with one node"
