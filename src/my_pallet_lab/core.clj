@@ -2,7 +2,8 @@
   (:require [environ.core          :as env]
             [pallet.core           :as p]
             [pallet.phase          :as ph]
-            [pallet.action.package :as pa]))
+            [pallet.action.package :as pa]
+            [pallet.compute        :as c]))
 
 ;; provider's credentials
 
@@ -42,6 +43,8 @@
      :extends [with-curl with-wget]
      :node-spec my-nodes)))
 
+;; define group of nodes
+
 (def mygroup
   (p/group-spec
    "mygroup"
@@ -54,3 +57,10 @@
                :image    {:os-family :ubuntu :os-version-matches "12.10"}
                :hardware {:min-cores 1 :min-ram 512}
                :network  {:inbound-ports [22 80]})))
+
+;; converge (update the number of nodes for the group mygroup)
+
+(comment
+  (pallet.core/converge
+   (pallet.core/group-spec "mygroup" :count 1)
+   :compute (pallet.compute/service "aws")))
