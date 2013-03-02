@@ -1,6 +1,6 @@
-(ns my-pallet-lab.core)
+(ns my-pallet-lab.core
+  (:require [environ.core :as env]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(def aws-creds
+  {:access-key (env/env :aws-access-key)
+   :secret-key (env/env :aws-secret-key)})
