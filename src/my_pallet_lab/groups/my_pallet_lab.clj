@@ -7,14 +7,14 @@
    [pallet.actions        :refer [package]]
    [pallet.configure      :as pc]))
 
-;; ami
+;; potential amis
 ;; :image-id "ami-2861685c" - ;; ubuntu 12.10 eu-west-1 i386 instance-store
 ;; :image-id "ami-7e636a0a" - ;; ubuntu 12.10 eu-west-1 i386 ebs
 
-;; define the machine
+;; define a specification for a group of machine
 
 (def
-  ^{:doc "Defines a group spec that can be passed to converge or lift."}
+  ^{:doc "Defines a group spec that can be passed to converge (creation/termination) or lift (updates)."}
   mygroup
   (group-spec
    "mygroup"
@@ -24,6 +24,7 @@
                         ;; (package "wget")
                         ;; (package "git")
                         ;; (package "emacs24")
+                        ;; your crates (set of packages or software to install) here
                         )}
    :node-spec (node-spec
                :image {:os-family :ubuntu
@@ -33,26 +34,31 @@
                           :min-cores 1
                           :min-ram 512})))
 
-(defn start-node
-  "Starting the group-spec with one node"
-  [group-spec]
-  (-> group-spec
-      (assoc :count 1)
+;; personal functions
+
+(defn scale-cluster
+  "Scale the cluster of nodes from the group-spec group-spec with nb-nodes nodes (0 to terminate all nodes from the group)"
+  [group-spec nb-nodes]
+    (-> group-spec
+      (assoc :count nb-nodes)
       (converge :compute (pc/compute-service :aws))))
 
-(defn stop-node
-  "Stopping the group-spec"
+(defn start-node
+  "Starting one node belonging to the group-spec"
   [group-spec]
-  (-> group-spec
-      (assoc :count 0)
-      (converge :compute (pc/compute-service :aws))))
+  (scale-cluster group-spec 1))
+
+(defn stop-cluster
+  "Stopping the cluster of group-spec machines"
+  [group-spec]
+  (scale-cluster group-spec 0))
 
 (comment
   ;; personal function:
   ;; - to start a node
   (start-node mygroup)
   ;; - to stop one
-  (stop-node mygroup)
+  (stop-cluster mygroup)
 
   ;; to list the nodes
   (pallet.compute/nodes (pc/compute-service :aws)))
