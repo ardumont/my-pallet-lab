@@ -28,9 +28,10 @@
    :node-spec (node-spec
                :image {:os-family :ubuntu
 ;;                       :os-version-matches "12.10"
-                       :image-id "eu-west-1/ami-2861685c"
-                       :smallest true}
-               :hardware {:min-cores 1 :min-ram 512})))
+                       :image-id "eu-west-1/ami-2861685c"}
+               :hardware {:smallest true
+                          :min-cores 1
+                          :min-ram 512})))
 
 (defn start-node
   "Starting the group-spec with one node"
