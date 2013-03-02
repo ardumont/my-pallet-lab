@@ -1,11 +1,10 @@
 (ns my-pallet-lab.groups.my-pallet-lab
   "Node definitions for my-pallet-lab"
   (:use
-   [pallet.core :only [group-spec server-spec node-spec converge]]
-   [pallet.crate.automated-admin-user :only [automated-admin-user]]
-   [pallet.phase :only [phase-fn]])
+   [pallet.api                        :only [group-spec server-spec node-spec converge plan-fn]]
+   [pallet.crate.automated-admin-user :only [automated-admin-user]])
   (:require
-   [pallet.action.package :as pa]
+   [pallet.actions        :refer [package]]
    [pallet.configure      :as pc]))
 
 ;; ami
@@ -19,12 +18,12 @@
   mygroup
   (group-spec
    "mygroup"
-   :phases {:bootstrap automated-admin-user
-            :configure (phase-fn
-                        (pa/package "curl")
-                        (pa/package "wget")
-                        (pa/package "git")
-                        (pa/package "emacs24"))}
+   :phases {:bootstrap (plan-fn (automated-admin-user))
+            :configure (plan-fn
+                        (package "curl")
+                        (package "wget")
+                        (package "git")
+                        (package "emacs24"))}
    :node-spec (node-spec
                :image {:os-family :ubuntu
 ;;                       :os-version-matches "12.10"

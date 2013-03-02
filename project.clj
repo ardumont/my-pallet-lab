@@ -1,29 +1,41 @@
 (defproject my-pallet-lab "0.1.0-SNAPSHOT"
   :description "My pallet learning playground"
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [org.cloudhoist/pallet "0.7.3"]
-                 [org.cloudhoist/pallet-jclouds "1.4.3"]
-                 ;; To get started we include all jclouds compute providers.
-                 ;; You may wish to replace this with the specific jclouds
-                 ;; providers you use, to reduce dependency sizes.
-                 [org.jclouds/jclouds-allblobstore "1.4.2"]
-                 [org.jclouds/jclouds-allcompute "1.4.2"]
-                 [org.jclouds.driver/jclouds-slf4j "1.4.2"
-                  ;; the declared version is old and can overrule the
-                  ;; resolved version
-                  :exclusions [org.slf4j/slf4j-api]]
-                 [org.jclouds.driver/jclouds-sshj "1.4.2"]
-                 [ch.qos.logback/logback-classic "1.0.0"]]
-  :dev-dependencies [[org.cloudhoist/pallet
-                      "0.7.3" :type "test-jar"]
+
+                 ;; The latest pallet
+                 [com.palletops/pallet "0.8.0-beta.1"]
+
+                 ;; The latest jclouds fun
+                 [org.cloudhoist/pallet-jclouds "1.5.2"]
+                 [org.jclouds/jclouds-allblobstore "1.5.5"]
+
+                 [org.jclouds/jclouds-allcompute "1.5.5"]
+                 [org.jclouds.driver/jclouds-slf4j "1.5.5"]
+                 [org.jclouds.driver/jclouds-jsch "1.5.5"]
+                 [org.jclouds/jclouds-compute "1.5.5"]
+                 [org.jclouds/jclouds-blobstore "1.5.5"]
+                 [org.slf4j/slf4j-api "1.6.1"]
+                 [ch.qos.logback/logback-core "1.0.0"]
+                 [ch.qos.logback/logback-classic "1.0.0"]
+
+                 ;; Rackspace London and Greenqloud jclouds providers,
+                 ;; becuase if you are going to be in the cloud you
+                 ;; might as well be green. See
+                 ;; https://www.mastodonc.com/dashboard for more
+                 ;; information.
+                 [org.jclouds.provider/rackspace-cloudservers-uk "1.5.5"]
+                 [org.jclouds.labs/greenqloud-compute "1.5.5"]
+                 ]
+  :exclusions [org.jclouds/jclouds-allblobstore
+               org.jclouds/jclouds-allcompute
+               org.jclouds/jclouds-compute
+               org.jclouds/jclouds-blobstore
+               org.jclouds.driver/jclouds-slf4j
+               org.jclouds.driver/jclouds-jsch
+               org.jclouds.labs/greenqloud-compute]
+  :dev-dependencies [[org.cloudhoist/pallet "0.7.3" :type "test-jar"]
                      [org.cloudhoist/pallet-lein "0.5.2"]]
-  :profiles {:dev
-             {:dependencies
-              [[org.cloudhoist/pallet "0.7.3" :classifier "tests"]]
-              :plugins [[org.cloudhoist/pallet-lein "0.5.2"]]}
-             :leiningen/reply
-             {:dependencies [[org.slf4j/jcl-over-slf4j "1.7.2"]]
-              :exclusions [commons-logging]}}
+  :profiles {:dev {:plugins [[org.cloudhoist/pallet-lein "0.5.1"]]}}
   :local-repo-classpath true
   :repositories
   {"sonatype-snapshots" "https://oss.sonatype.org/content/repositories/snapshots"
