@@ -36,14 +36,14 @@
   "Starting the group-spec with one node"
   [group-spec]
   (-> group-spec
-      (assoc-in [:count] 1)
+      (assoc :count 1)
       (converge :compute (pc/compute-service :aws))))
 
 (defn stop-node
   "Stopping the group-spec"
   [group-spec]
   (-> group-spec
-      (assoc-in [:count] 0)
+      (assoc :count 0)
       (converge :compute (pc/compute-service :aws))))
 
 (comment
