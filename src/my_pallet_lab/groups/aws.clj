@@ -1,5 +1,5 @@
-(ns my-pallet-lab.groups.my-pallet-lab
-  "Node definitions for my-pallet-lab"
+(ns my-pallet-lab.groups.aws
+  "Node definitions for aws"
   (:use
    [pallet.api                        :only [group-spec server-spec node-spec plan-fn]]
    [pallet.crate.automated-admin-user :only [automated-admin-user]])
