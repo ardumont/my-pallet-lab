@@ -43,4 +43,4 @@
   (pr/stop-cluster mygroup-ec2 :aws)
 
   ;; to list the nodes
-  (pr/pallet.compute/nodes (pc/compute-service :aws)))
+  (pallet.compute/nodes (pc/compute-service :aws)))
