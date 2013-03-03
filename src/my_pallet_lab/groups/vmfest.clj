@@ -10,12 +10,17 @@
 
 (def
   ^{:doc "Defines a group spec that can be passed to converge (creation/termination) or lift (updates)."}
-  mygroup-ec2
+  mygroup-vbox
   (group-spec
-   "mygroup"
+   "mygroup-vbox"
    :phases {:bootstrap (plan-fn (automated-admin-user))
             :configure (plan-fn
-                        (package "curl"))}
+                        (package "curl")
+                        ;; (package "wget")
+                        ;; (package "git")
+                        ;; (package "emacs24")
+                        ;; your crates (set of packages or software to install) here
+                        )}
    :node-spec (node-spec
                :image {:os-family :debian
                        :image-id :debian-6.0.2.1-64bit-v0.3}
@@ -25,10 +30,10 @@
 
 (comment
   ;; personal function:
-  ;; - to start a node
-  (pr/start-node mygroup-ec2 :vmfest)
+  ;; - to start a node using vbox service (vmfest under cf. ~/.pallet/services/vbox.clj)
+  (pr/start-node mygroup-vbox :vbox)
   ;; - to stop one
-  (pr/stop-cluster mygroup-ec2 :vmfest)
+  (pr/stop-cluster mygroup-vbox :vbox)
 
   ;; to list the nodes
-  (pr/pallet.compute/nodes (pc/compute-service :vmfest)))
+  (pallet.compute/nodes (pc/compute-service :vbox)))
