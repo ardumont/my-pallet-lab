@@ -8,6 +8,7 @@
                  ;; The latest jclouds fun
                  [org.cloudhoist/pallet-jclouds "1.5.2"]
                  [org.cloudhoist/pallet-vmfest "0.2.1"]
+                 [vmfest "0.2.8"]
                  [org.jclouds/jclouds-allblobstore "1.5.5"]
 
                  [org.jclouds/jclouds-allcompute "1.5.5"]
