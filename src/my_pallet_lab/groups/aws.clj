@@ -1,12 +1,10 @@
 (ns my-pallet-lab.groups.aws
   "Node definitions for aws"
-  (:use
-   [pallet.api                        :only [group-spec server-spec node-spec plan-fn]]
-   [pallet.crate.automated-admin-user :only [automated-admin-user]])
-  (:require
-   [pallet.actions        :refer [package]]
-   [pallet.configure      :as pc]
-   [my-pallet-lab.groups.provision :as pr]))
+  (:use [pallet.api                        :only [group-spec server-spec node-spec plan-fn]]
+        [pallet.crate.automated-admin-user :only [automated-admin-user]])
+  (:require [pallet.actions        :refer [package]]
+            [pallet.configure      :as pc]
+            [my-pallet-lab.groups.provision :as pr]))
 
 ;; potential amis
 ;; :image-id "ami-2861685c" - ;; ubuntu 12.10 eu-west-1 i386 instance-store
@@ -28,7 +26,8 @@
                         ;; your crates (set of packages or software to install) here
                         )}
    :node-spec (node-spec
-               :image {:os-family :ubuntu
+               :image {
+                       ;;:os-family :ubuntu
 ;;                       :os-version-matches "12.10"
                        :image-id "eu-west-1/ami-2861685c"}
                :hardware {:smallest true

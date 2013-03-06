@@ -1,12 +1,10 @@
 (ns my-pallet-lab.groups.vmfest
   "Node definitions for vmfest"
-  (:use
-   [pallet.api                        :only [group-spec server-spec node-spec plan-fn]]
-   [pallet.crate.automated-admin-user :only [automated-admin-user]])
-  (:require
-   [pallet.actions                 :refer [package]]
-   [pallet.configure               :as pc]
-   [my-pallet-lab.groups.provision :as pr]))
+  (:use [pallet.api                        :only [group-spec server-spec node-spec plan-fn]]
+        [pallet.crate.automated-admin-user :only [automated-admin-user]])
+  (:require [pallet.actions                 :refer [package]]
+            [pallet.configure               :as pc]
+            [my-pallet-lab.groups.provision :as pr]))
 
 (def
   ^{:doc "Defines a group spec that can be passed to converge (creation/termination) or lift (updates)."}
@@ -16,16 +14,15 @@
    :phases {:bootstrap (plan-fn (automated-admin-user))
             :configure (plan-fn
                         (package "curl")
-                        ;; (package "wget")
-                        ;; (package "git")
+                        (package "wget")
+                        (package "git")
                         ;; (package "emacs24")
                         ;; your crates (set of packages or software to install) here
                         )}
    :node-spec (node-spec
-               :image {:os-family :debian
-                       :image-id :debian-6.0.2.1-64bit-v0.3}
-               :hardware {:smallest true
-                          :min-cores 1
+               :image {:os-family :ubuntu
+                       :image-id :ubuntu-12.04}
+               :hardware {:min-cores 1
                           :min-ram 512})))
 
 (comment
