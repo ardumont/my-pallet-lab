@@ -34,5 +34,12 @@
   ;; - to stop one
   (pr/stop-cluster mygroup-vbox service-vbox)
 
+  ;; - to update node
+  (-> mygroup-vbox
+      (assoc [:phases :configure] (plan-fn
+                                   (package "gitk")
+                                   (package "emacs")))
+      (pr/update-cluster service-vbox))
+
   ;; to list the nodes
   (pallet.compute/nodes service-vbox))

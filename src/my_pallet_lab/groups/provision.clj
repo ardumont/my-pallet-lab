@@ -1,7 +1,7 @@
 (ns my-pallet-lab.groups.provision
   "Node definitions for my-pallet-lab"
   (:use
-   [pallet.api            :only [converge]])
+   [pallet.api            :only [converge lift]])
   (:require
    [pallet.configure      :as pc]))
 
@@ -23,3 +23,8 @@
   "Stopping the cluster of group-spec machines"
   [group-spec service]
   (scale-cluster group-spec 0 service))
+
+(defn update-cluster
+  "Update the configuration of group-spec"
+  [group-spec service]
+  (lift group-spec :compute service))
