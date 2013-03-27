@@ -35,9 +35,6 @@
                org.jclouds.driver/jclouds-slf4j
                org.jclouds.driver/jclouds-jsch
                org.jclouds.labs/greenqloud-compute]
-  :dev-dependencies [[org.cloudhoist/pallet "0.7.3" :type "test-jar"]
-                     [org.cloudhoist/pallet-lein "0.5.2"]]
-  :profiles {:dev {:plugins [[org.cloudhoist/pallet-lein "0.5.1"]]}}
   :local-repo-classpath true
   :repositories
   {"sonatype-snapshots" "https://oss.sonatype.org/content/repositories/snapshots"
