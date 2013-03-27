@@ -12,7 +12,7 @@
   [group-spec nb-nodes service]
     (-> group-spec
       (assoc :count nb-nodes)
-      (converge :compute (pc/compute-service service))))
+      (converge :compute service)))
 
 (defn start-node
   "Starting one node belonging to the group-spec"
