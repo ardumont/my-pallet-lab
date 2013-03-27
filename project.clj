@@ -8,9 +8,9 @@
                  ;; The latest jclouds fun
                  [org.cloudhoist/pallet-jclouds                  "1.5.2"]
                  [org.cloudhoist/pallet-vmfest                   "0.3.0-alpha.2"]
-                 [vmfest                                         "0.2.9"]
-                 [org.jclouds/jclouds-allblobstore               "1.5.5"]
+                 [org.virtualbox/vboxjws                         "4.2.6"]
 
+                 [org.jclouds/jclouds-allblobstore               "1.5.5"]
                  [org.jclouds/jclouds-allcompute                 "1.5.5"]
                  [org.jclouds.driver/jclouds-slf4j               "1.5.5"]
                  [org.jclouds.driver/jclouds-jsch                "1.5.5"]
