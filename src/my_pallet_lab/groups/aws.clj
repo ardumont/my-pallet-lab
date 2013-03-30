@@ -16,7 +16,7 @@
 
 (def
   ^{:doc "Defines a group spec that can be passed to converge (creation/termination) or lift (updates)."}
-  mygroup-ec2
+  mygroup-aws
   (group-spec
    "mygroup"
    :phases {:bootstrap (plan-fn (automated-admin-user))
@@ -39,9 +39,15 @@
 (comment
   ;; personal function:
   ;; - to start a node
-  (pr/start-node mygroup-ec2 service-aws)
+  (pr/start-node mygroup-aws service-aws)
   ;; - to stop one
-  (pr/stop-cluster mygroup-ec2 service-aws)
+  (pr/stop-cluster mygroup-aws service-aws)
+  ;; - to update the group
+  (-> mygroup-aws
+      (assoc [:phases :configure] (plan-fn
+                                   (package "gitk")
+                                   (package "emacs24")))
+      (pr/update-cluster service-aws))
 
   ;; to list the nodes
   (pallet.compute/nodes service-aws))
